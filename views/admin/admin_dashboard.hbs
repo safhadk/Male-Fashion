@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Male Fashion</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <!-- https://fonts.google.com/specimen/Roboto -->
+    <link rel="stylesheet" href="/admin/css/fontawesome.min.css">
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="/admin/css/bootstrap.min.css">
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="/admin/css/templatemo-style.css">
+    <!--
+	Product Admin CSS Template
+	https://templatemo.com/tm-524-product-admin
+	-->
+
+    {{!-- dashboard extra added --}}
+
+     <link href="dashboard/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="dashboard/dashbolib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="dashboard/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="dashboard/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="dashboard/css/style.css" rel="stylesheet">
+
+</head>
+
+<body id="reportsPage">
+    <div class="" id="home">
+        <nav class="navbar navbar-expand-xl">
+            <div class="container h-100">
+                <a class="navbar-brand" href="/admin">
+                    <h1 class="tm-site-title mb-0">Product Admin</h1>
+                </a>
+                <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars tm-nav-icon"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto h-100">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        {{!-- <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-alt"></i>
+                                <span>
+                                    Reports
+                                     <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Daily Report</a>
+                                <a class="dropdown-item" href="#">Weekly Report</a>
+                                <a class="dropdown-item" href="#">Yearly Report</a>
+                            </div>
+                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/products">
+                                <i class="fas fa-shopping-cart"></i>
+                                Products
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/user_details">
+                                <i class="far fa-user"></i>
+                                Users
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="/admin/orders">
+                                <i class="	fas fa-cart-arrow-down"></i>
+                                Orders
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-gift"></i>
+                                <span>
+                                    Coupons
+                                     {{!-- <i class="fas fa-angle-down"></i> --}}
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/admin/coupon">Create Coupons</a>
+                                <a class="dropdown-item" href="/admin/manageCoupon">Manage Coupons</a>
+                                {{!-- <a class="dropdown-item" href="#">Yearly Report</a> --}}
+                            </div>
+                             <li class="nav-item">
+                            <a class="nav-link" href="/admin/inventory">
+                                <i class="	fa fa-cubes"></i>
+                                Inventory
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/banner">
+                                <i class="	fas fa-bullhorn"></i>
+                                Banner
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-alt"></i>
+                                <span>
+                                    Reports
+                                     {{!-- <i class="fas fa-angle-down"></i> --}}
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/admin/dailyReport">Daily Report</a>
+                                <a class="dropdown-item" href="/admin/monthlyReport">Monthly Report</a>
+                                <a class="dropdown-item" href="/admin/yearlyReport">Yearly Report</a>
+                            </div>
+                        </li>
+                        </li>
+                         {{!-- <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-alt"></i>
+                                <span>
+                                    Reports
+                                     <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Daily Report</a>
+                                <a class="dropdown-item" href="#">Weekly Report</a>
+                                <a class="dropdown-item" href="#">Yearly Report</a>
+                            </div>
+                        </li> --}}
+                        {{!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-cog"></i>
+                                <span>
+                                    Settings 
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="#">Billing</a>
+                                <a class="dropdown-item" href="#">Customize</a>
+                            </div>
+                        </li> --}}
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link d-block" href="/admin/admin_logout">
+                              
+                              </i>Admin, <b>Logout</b>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+         {{!-- <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <form class="d-none d-md-flex ms-4">
+                    <input class="form-control border-0" type="search" placeholder="Search">
+                </form>
+                <div class="navbar-nav align-items-center ms-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-envelope me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Message</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">See all message</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-bell me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Notificatin</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Profile updated</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">New user added</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Password changed</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">See all notifications</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">John Doe</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">My Profile</a>
+                            <a href="#" class="dropdown-item">Settings</a>
+                            <a href="#" class="dropdown-item">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav> --}}
+             <!-- Sale & Revenue Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class=" rounded d-flex align-items-center justify-content-between p-4" style="background-color: #567086;color:white">
+                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Today Orders</p>
+                                <h6 class="mb-0">{{todaysOrder}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class=" rounded d-flex align-items-center justify-content-between p-4" style="background-color: #567086;color:white">
+                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Orders</p>
+                                <h6 class="mb-0">{{totalOrders}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class=" rounded d-flex align-items-center justify-content-between p-4" style="background-color: #567086;color:white">
+                            <i class="fa fa-chart-area fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Today Revenue</p>
+                                <h6 class="mb-0">₹{{todaysRevenue}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class=" rounded d-flex align-items-center justify-content-between p-4" style="background-color: #567086;color:white">
+                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Revenue</p>
+                                <h6 class="mb-0">₹{{totalRevenue}} </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sale & Revenue End -->
+            
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="text-white mt-5 mb-5">Welcome back, <b>Admin</b></p>
+                </div>
+            </div>
+            <!-- row -->
+            <div class="row tm-content-row">
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block">
+                        <h2 class="tm-block-title">Monthly Sales</h2>
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block">
+                        <h2 class="tm-block-title">Order Report</h2>
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller">
+                        <h2 class="tm-block-title">Total Cod and Prepaid Orders</h2>
+                        <div id="pieChartContainer">
+                            <canvas id="pieChart" class="chartjs-render-monitor" width="200" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-overflow">
+                       <h2 class="tm-block-title"></i> Notification List ({{newOrders}})  </h2>
+                        <div class="tm-notification-items">
+                         
+                            {{#each notification}}
+                            <div class="media tm-notification-item" style="align-items:center">
+                                <div class="tm-gray-circle"><img src="img/notification-03.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>safad</b> you <b>have</b> recieved <b>1</b> <b>new</b>  <b>Order</b><form action=""></form> <a href="/admin/orders"
+                                            class="tm-notification-link">{{this.orderId}}</a> </form></p>
+                                    {{!-- <span class="tm-small tm-text-color-secondary">6h ago.</span> --}}
+                                </div>
+                            </div>
+                            {{/each}}
+                          
+{{!--                           
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Laura Cute</b> and <b>6 others</b> sent you <a href="#"
+                                            class="tm-notification-link">product records</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="img/notification-02.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Samantha</b> and <b>6 others</b> sent you <a href="#"
+                                            class="tm-notification-link">order stuffs</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="img/notification-03.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Sophie</b> and <b>6 others</b> sent you <a href="#"
+                                            class="tm-notification-link">product updates</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Lily A</b> and <b>6 others</b> sent you <a href="#"
+                                            class="tm-notification-link">product updates</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="img/notification-02.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Amara</b> and <b>6 others</b> sent you <a href="#"
+                                            class="tm-notification-link">product updates</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="img/notification-03.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Cinthela</b> and <b>6 others</b> sent you <a href="#"
+                                            class="tm-notification-link">product updates</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                                </div>
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+                        <h2 class="tm-block-title"> New Orders ({{newOrders}})</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ORDER ID</th>
+                                    <th scope="col">STATUS</th>
+                                    <th scope="col">ORDERD DATE</th>
+                                    <th scope="col">SALE</th>
+                                    <th scope="col">DISTANCE</th>
+                                    <th scope="col">PAYMENT</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each newOrder}}
+                                <tr>
+                                    <th scope="row"><b>{{this.orderId}}</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>{{this.status}}
+                                    </td>
+                                    <td><b>{{this.orderDate}}</b></td>
+                                    <td><b>₹{{this.subTotal}}</b></td>
+                                    <td><b>{{this.payment}}</b></td>
+                                    <td>{{this.paymentStatus}}</td>
+                                    
+                                </tr>
+                                {{!-- <tr>
+                                    <th scope="row"><b>#122348</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pending
+                                    </td>
+                                    <td><b>Jacob Miller</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>360 km</b></td>
+                                    <td>11:00, 10 NOV 2018</td>
+                                    <td>04:00, 14 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122347</b></th>
+                                    <td>
+                                        <div class="tm-status-circle cancelled">
+                                        </div>Cancelled
+                                    </td>
+                                    <td><b>George Wilson</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>340 km</b></td>
+                                    <td>12:00, 22 NOV 2018</td>
+                                    <td>06:00, 28 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122346</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>William Aung</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+                                    <td>15:00, 10 NOV 2018</td>
+                                    <td>09:00, 14 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122345</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pending
+                                    </td>
+                                    <td><b>Harry Ryan</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>280 km</b></td>
+                                    <td>15:00, 11 NOV 2018</td>
+                                    <td>09:00, 17 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122344</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pending
+                                    </td>
+                                    <td><b>Michael Jones</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+                                    <td>18:00, 12 OCT 2018</td>
+                                    <td>06:00, 18 OCT 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122343</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Timmy Davis</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+                                    <td>12:00, 10 OCT 2018</td>
+                                    <td>08:00, 18 OCT 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122342</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Oscar Phyo</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>420 km</b></td>
+                                    <td>15:30, 06 OCT 2018</td>
+                                    <td>09:30, 16 OCT 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122341</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Charlie Brown</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>300 km</b></td>
+                                    <td>11:00, 10 OCT 2018</td>
+                                    <td>03:00, 14 OCT 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122340</b></th>
+                                    <td>
+                                        <div class="tm-status-circle cancelled">
+                                        </div>Cancelled
+                                    </td>
+                                    <td><b>Wilson Cookies</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+                                    <td>17:30, 12 OCT 2018</td>
+                                    <td>08:30, 22 OCT 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122339</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Richard Clamon</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>150 km</b></td>
+                                    <td>15:00, 12 OCT 2018</td>
+                                    <td>09:20, 26 OCT 2018</td>
+                                </tr> --}}
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="tm-footer row tm-mt-small">
+            <div class="col-12 font-weight-light">
+                <p class="text-center text-white mb-0 px-4 small">
+                    Copyright &copy; <b>2018</b> All rights reserved.
+
+                    Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template
+                        Mo</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/admin/js/jquery-3.3.1.min.js"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="/admin/js/moment.min.js"></script>
+    <!-- https://momentjs.com/ -->
+    <script src="/admin/js/Chart.min.js"></script>
+    <!-- http://www.chartjs.org/docs/latest/ -->
+    <script src="/admin/js/bootstrap.min.js"></script>
+    <!-- https://getbootstrap.com/ -->
+    <script src="/admin/js/tooplate-scripts.js"></script>
+    <script>
+        Chart.defaults.global.defaultFontColor = 'white';
+        let ctxLine,
+            ctxBar,
+            ctxPie,
+            optionsLine,
+            optionsBar,
+            optionsPie,
+            configLine,
+            configBar,
+            configPie,
+            lineChart;
+        barChart, pieChart;
+        // DOM is ready
+        $(function () {
+     let order= {
+  jan: '{{monthOrder.jan}}',
+  feb: '{{monthOrder.feb}}'
+};
+
+let sales={
+    jan:'{{monthSales.jan}}',
+    feb:'{{monthSales.feb}}'
+}
+
+
+
+
+            drawLineChart(order,sales); // Line Chart
+            
+            drawBarChart({{'delivered'}},{{'cancelled'}},{{'returned'}},{{'shipped'}}); // Bar Chart
+            drawPieChart({{'cod'}},{{'prepaid'}}); // Pie Chart
+            $(window).resize(function () {
+                updateLineChart();
+                updateBarChart();
+            });
+        })
+    </script>
+
+      <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="dashboard/lib/chart/chart.min.js"></script>
+    <script src="dashboard/lib/easing/easing.min.js"></script>
+    <script src="dashboard/lib/waypoints/waypoints.min.js"></script>
+    <script src="dashboard/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="dashboard/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="dashboard/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="dashboard/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="dashboard/js/main.js"></script>
+</body>
+
+</html>

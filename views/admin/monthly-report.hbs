@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Male Fashion</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <!-- https://fonts.google.com/specimen/Roboto -->
+    <link rel="stylesheet" href="/admin/css/fontawesome.min.css">
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="/admin/css/bootstrap.min.css">
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="/admin/css/templatemo-style.css">
+
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"> </script>
+    <!--
+	Product Admin CSS Template
+	https://templatemo.com/tm-524-product-admin
+	-->
+<style>
+  .month-selector {
+        display: inline-block;
+        width: 200px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+       
+      }
+      
+      .month-selector select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 1px 1px 1px ;
+        height: 40px;
+      }
+
+input[type="submit"] {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #567086;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body id="reportsPage">
+    <div class="" id="home">
+         <nav class="navbar navbar-expand-xl">
+            <div class="container h-100">
+                <a class="navbar-brand" href="/admin">
+                    <h1 class="tm-site-title mb-0">Product Admin</h1>
+                </a>
+                <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars tm-nav-icon"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto h-100">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        {{!-- <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-alt"></i>
+                                <span>
+                                    Reports
+                                     <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Daily Report</a>
+                                <a class="dropdown-item" href="#">Weekly Report</a>
+                                <a class="dropdown-item" href="#">Yearly Report</a>
+                            </div>
+                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/products">
+                                <i class="fas fa-shopping-cart"></i>
+                                Products
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/user_details">
+                                <i class="far fa-user"></i>
+                                Users
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="/admin/orders">
+                                <i class="	fas fa-cart-arrow-down"></i>
+                                Orders
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-gift"></i>
+                                <span>
+                                    Coupons
+                                     {{!-- <i class="fas fa-angle-down"></i> --}}
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/admin/coupon">Create Coupons</a>
+                                <a class="dropdown-item" href="/admin/manageCoupon">Manage Coupons</a>
+                                {{!-- <a class="dropdown-item" href="#">Yearly Report</a> --}}
+                            </div>
+                             <li class="nav-item">
+                            <a class="nav-link" href="/admin/inventory">
+                                <i class="	fa fa-cubes"></i>
+                                Inventory
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/banner">
+                                <i class="	fas fa-bullhorn"></i>
+                                Banner
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-alt"></i>
+                                <span>
+                                    Reports
+                                     {{!-- <i class="fas fa-angle-down"></i> --}}
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/admin/dailyReport">Daily Report</a>
+                                <a class="dropdown-item" href="/admin/monthlyReport">Monthly Report</a>
+                                <a class="dropdown-item" href="/admin/yearlyReport">Yearly Report</a>
+                            </div>
+                        </li>
+                        </li>
+                         {{!-- <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-alt"></i>
+                                <span>
+                                    Reports
+                                     <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Daily Report</a>
+                                <a class="dropdown-item" href="#">Weekly Report</a>
+                                <a class="dropdown-item" href="#">Yearly Report</a>
+                            </div>
+                        </li> --}}
+                        {{!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-cog"></i>
+                                <span>
+                                    Settings 
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="#">Billing</a>
+                                <a class="dropdown-item" href="#">Customize</a>
+                            </div>
+                        </li> --}}
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link d-block" href="/admin/admin_logout">
+                              
+                              </i>Admin, <b>Logout</b>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+        <!-- PAGE INNER
+            ================================================== -->
+        <div class="page-inner">
+
+            <!-- PAGE MAIN WRAPPER
+                ================================================== -->
+            <div id="main-wrapper">
+                <!-- row -->
+                <div class="row align-items-center grid-margin">
+                    <div class="col-12">
+                        <div class="card card-white">
+                            <div class="card-body row align-items-center">
+                                 <div class="container-fluid pt-4 px-4">
+                                    {{#if noOrders}} <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class=" rounded d-flex align-items-center justify-content-between p-4" style="background-color: #567086;color:white">
+                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Orders</p>
+                                <h6 class="mb-0">0</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class=" rounded d-flex align-items-center justify-content-between p-4" style="background-color: #567086;color:white">
+                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Revenue</p>
+                                <h6 class="mb-0">₹0</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class=" rounded d-flex align-items-center justify-content-between p-4" style="background-color: #567086;color:white">
+                            <i class="fa fa-chart-area fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">COD</p>
+                                <h6 class="mb-0">0</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class=" rounded d-flex align-items-center justify-content-between p-4" style="background-color: #567086;color:white">
+                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">PREPAID</p>
+                                <h6 class="mb-0">0</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>{{else}}
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class=" rounded d-flex align-items-center justify-content-between p-4" style="background-color: #567086;color:white">
+                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Orders</p>
+                                <h6 class="mb-0">{{currentMonthOrderCount}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class=" rounded d-flex align-items-center justify-content-between p-4" style="background-color: #567086;color:white">
+                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Revenue</p>
+                                <h6 class="mb-0">₹{{totalRevenue}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class=" rounded d-flex align-items-center justify-content-between p-4" style="background-color: #567086;color:white">
+                            <i class="fa fa-chart-area fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">COD</p>
+                                <h6 class="mb-0">{{cod}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class=" rounded d-flex align-items-center justify-content-between p-4" style="background-color: #567086;color:white">
+                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">PREPAID</p>
+                                <h6 class="mb-0">{{prepaid}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+            
+                                {{!-- <div class="col-12 col-md-4 mb-4 mb-md-0">
+                                    <h4 class="mb-0">Orders</h4>
+                                </div> --}}
+
+                                {{!-- <div class="col-12 col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3 mb-md-0">
+                                            <select class="form-control form-select">
+                                                <option>Status</option>
+                                                <option>Delivered</option>
+                                                <option>Pending</option>
+                                                <option>Processing</option>
+                                                <option>Failed</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-3 mb-3 mb-md-0">
+                                            <select class="form-control form-select">
+                                                <option>Order Limits</option>
+                                                <option>Last 7 Orders</option>
+                                                <option>Last 15 Orders</option>
+                                                <option>Last 30 Orders</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="exampleInputEmail1"
+                                                aria-describedby="exampleInputEmail1" placeholder="search by name" />
+                                        </div>
+                                    </div>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+                <!-- row -->
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 grid-margin">
+                        <div class="card card-white ">
+                            <div class="card-heading clearfix">
+                                <h4 class="card-title pl-3 mt-3" style="font-weight:bold" >Monthly Sales Report</h4>
+                            </div>
+                            
+                                <div>
+                                 <form action="/admin/monthlyReport" method="get">
+                                    {{!-- <h4 class="mb-3 mt-5 ml-5">Custom Date</h4> --}}
+    {{!-- <label for="date" class="" style="font-weight:bold">Select Date: </label>
+    <input type="date" id="date" name="date" > --}}
+    {{!-- <label for="end-date">End Date: </label>
+    <input type="text" id="end-date" name="end-date"> --}}
+
+    <div class="month-selector ml-5">
+      <select id="month-select" name="month">
+        <option value="01" name="month">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+    </div>
+  
+
+
+
+
+
+<input type="submit" value="Filter">
+ <button id="download-button" type="submit" class="btn btn-primary" style="border-radius: 5px;" name="excel" value="excel">Download Excel</button>
+ <button id="download-button" type="submit" class="btn btn-primary" style="border-radius: 5px;" name="pdf" value="pdf">Download PDF</button>
+  </form>
+
+  </div>
+  
+                            
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table mb-0" id="table">
+                                        <thead class="bg-light">
+                                            <tr style="background-color: #50697f;">
+                                                <th>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="customCheck1">
+                                                        <label class="custom-control-label"
+                                                            for="customCheck1">&nbsp;</label>
+                                                    </div>
+                                                </th>
+                                                <th>Order ID</th>
+                                                <th>Billing Name</th>
+                                                <th>Date</th>
+                                                <th>Total</th>
+                                                <th>Payment Status</th>
+                                                <th>Payment Method</th>
+                                                <th>Order Status</th>
+                                                {{!-- <th>Update Order Status</th> --}}
+                                                {{!-- <th>View Details</th>
+                                                <th>Action</th> --}}
+                                            </tr>
+                                        </thead>
+                                        <tbody style="color:black">
+                                            {{#if noOrders}}
+                                            <h4 class="text-danger" style="font-weight:bold">No orders Found</h4>
+                                            {{else}}
+                                            {{#each orders}}
+                                            <tr>
+                                                <td>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="customCheck2">
+                                                        <label class="custom-control-label"
+                                                            for="customCheck2">&nbsp;</label>
+                                                    </div>
+                                                </td>
+                                                <td><a href="#" style="color:black">{{this.orderId}}</a> </td>
+                                                <td>{{this.address.[0].firstname}}</td>
+                                                <td>
+                                                    {{this.orderDate}}
+                                                </td>
+                                                <td>
+                                                    ₹{{this.subTotal}}
+                                                </td>
+                                                <td>
+                                                    <span class="badge rounded-pill bg-soft-green"
+                                                        style="font-size:12px">{{this.paymentStatus}}</span>
+                                                </td>
+                                                <td>
+                                                    <i class="fab fa-cc-mastercard me-1"
+                                                        style="margin-right:10px"></i>{{this.payment}}
+                                                </td>
+                                                <td  style="align-items: center; 
+ 
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: space-evenly;
+    padding-top: 28px;">
+                                                    <i class="tm-status-circle moving"></i><span id="{{this.orderId}}">{{this.status}}</span>
+                                                </td>
+                                                {{!-- <td> --}}
+                                                    {{!-- <form action="/admin/update-orderStatus" method="post" onclick="updateStatus('{{this.orderId}}')" id="{{this.orderId}}" name=""> --}}
+
+
+
+                                                         
+                                                        {{!-- <input  type="button" value="shipped"  onclick="updateStatus('{{this.orderId}}','Shipped')" style="background-color: rgb(149, 242, 149);border:none">
+                                                        <input  type="button" value="delivered" onclick="updateStatus('{{this.orderId}}','Delivered')"style="background-color: yellow;border:none">
+                                                        <input  type="button" value="cancel"  onclick="updateStatus('{{this.orderId}}','Cancelled')" style="background-color: rgb(222, 142, 13);border:none">
+                                                        <input  type="button" value="return"  onclick="updateStatus('{{this.orderId}}','Returned')" style="background-color: red;border:none"> --}}
+                                                        
+                                                    {{!-- </form> --}}
+                                                {{!-- </td> --}}
+                                                {{!-- <td>
+                                                   <a href="/admin/order-detail/{{this._id}}"> <button type="button" class="btn btn-primary btn-sm btn-rounded">
+                                                        View Details
+                                                    </button></a>
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="me-3" style="margin-right:10px"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                                        <i class="far fa-edit text-primary"></i>
+                                                    </a>
+                                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Delete">
+                                                        <i class="far fa-trash-alt text-danger"></i>
+                                                    </a>
+                                                </td> --}}
+                                            </tr>
+                                            {{/each}}
+                                            {{/if}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <footer class="tm-footer row tm-mt-small">
+                <div class="col-12 font-weight-light">
+                    <p class="text-center text-white mb-0 px-4 small">
+                        Copyright &copy; <b>2018</b> All rights reserved.
+
+                        Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template
+                            Mo</a>
+                    </p>
+                </div>
+            </footer>
+        </div>
+
+        <script src="/admin/js/jquery-3.3.1.min.js"></script>
+        <!-- https://jquery.com/download/ -->
+        <script src="/admin/js/moment.min.js"></script>
+        <!-- https://momentjs.com/ -->
+        <script src="/admin/js/Chart.min.js"></script>
+        <!-- http://www.chartjs.org/docs/latest/ -->
+        <script src="/admin/js/bootstrap.min.js"></script>
+        <!-- https://getbootstrap.com/ -->
+        <script src="/admin/js/tooplate-scripts.js"></script>
+      
+        <script>
+           
+            function updateStatus(orderId,status){
+                console.log("order id is" + orderId)
+           
+               
+                // send the coupon code to the server for validation
+                axios.post('/admin/update-orderStatus', {orderId: orderId,status:status})
+                    .then(response => {
+                        if (response.data) {
+                            document.getElementById(orderId).innerHTML=response.data.status
+                            console.log("final data is " +response.data.status)
+                        } 
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+              };
+        
+
+            
+        </script>
+        <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+    <script>
+    $(document).ready(function() {
+            $('#table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [ 'copy', 'csv', 'excel', 'pdf', 'print']
+            });
+        });
+
+        </script>
+
+</body>
+
+</html>

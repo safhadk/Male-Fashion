@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Male Fashion</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <!-- https://fonts.google.com/specimen/Roboto -->
+    <link rel="stylesheet" href="/admin/css/fontawesome.min.css">
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="/admin/css/bootstrap.min.css">
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="/admin/css/templatemo-style.css">
+    <!--
+	Product Admin CSS Template
+	https://templatemo.com/tm-524-product-admin
+	-->
+
+
+</head>
+
+<body id="reportsPage">
+    <div class="" id="home">
+        <nav class="navbar navbar-expand-xl">
+            <div class="container h-100">
+                <a class="navbar-brand" href="/admin">
+                    <h1 class="tm-site-title mb-0">Product Admin</h1>
+                </a>
+                <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars tm-nav-icon"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto h-100">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        {{!-- <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-alt"></i>
+                                <span>
+                                    Reports
+                                     <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Daily Report</a>
+                                <a class="dropdown-item" href="#">Weekly Report</a>
+                                <a class="dropdown-item" href="#">Yearly Report</a>
+                            </div>
+                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/products">
+                                <i class="fas fa-shopping-cart"></i>
+                                Products
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/user_details">
+                                <i class="far fa-user"></i>
+                                Users
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="/admin/orders">
+                                <i class="	fas fa-cart-arrow-down"></i>
+                                Orders
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-gift"></i>
+                                <span>
+                                    Coupons
+                                     {{!-- <i class="fas fa-angle-down"></i> --}}
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/admin/coupon">Create Coupons</a>
+                                <a class="dropdown-item" href="/admin/manageCoupon">Manage Coupons</a>
+                                {{!-- <a class="dropdown-item" href="#">Yearly Report</a> --}}
+                            </div>
+                             <li class="nav-item">
+                            <a class="nav-link" href="/admin/inventory">
+                                <i class="	fa fa-cubes"></i>
+                                Inventory
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/banner">
+                                <i class="	fas fa-bullhorn"></i>
+                                Banner
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-alt"></i>
+                                <span>
+                                    Reports
+                                     {{!-- <i class="fas fa-angle-down"></i> --}}
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/admin/dailyReport">Daily Report</a>
+                                <a class="dropdown-item" href="/admin/monthlyReport">Monthly Report</a>
+                                <a class="dropdown-item" href="/admin/yearlyReport">Yearly Report</a>
+                            </div>
+                        </li>
+                        </li>
+                         {{!-- <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-alt"></i>
+                                <span>
+                                    Reports
+                                     <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Daily Report</a>
+                                <a class="dropdown-item" href="#">Weekly Report</a>
+                                <a class="dropdown-item" href="#">Yearly Report</a>
+                            </div>
+                        </li> --}}
+                        {{!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-cog"></i>
+                                <span>
+                                    Settings 
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="#">Billing</a>
+                                <a class="dropdown-item" href="#">Customize</a>
+                            </div>
+                        </li> --}}
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link d-block" href="/admin/admin_logout">
+                              
+                              </i>Admin, <b>Logout</b>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+        <!-- PAGE INNER
+            ================================================== -->
+        <div class="page-inner">
+
+            <!-- PAGE MAIN WRAPPER
+                ================================================== -->
+            <div id="main-wrapper">
+                <!-- row -->
+                <div class="row g-xl-3">
+                        <div class="col-xl-4 grid-margin">
+                            <div class="card card-white h-100" >
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">General</h4>
+                                </div>
+                                <div class="card-body"style="
+    background-color: #567086;
+    color: white;
+">
+
+                                    <form class="needs-validation" novalidate>
+                                        <div class="row">
+                                            
+                                            <div class="col-md-12 mb-2">
+                                                <div class="form-group">
+                                                    <label>Status</label>
+                                                    <div >
+                                                        {{!-- <input type="text" class="form-control date-picker"> --}}
+                                                       {{orders.status}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-12 mb-2">
+                                                <div class="form-group">
+                                                    <label >Date Created</label>
+                                                    <div >
+                                                        {{!-- <input type="text" class="form-control date-picker"> --}}
+                                                        {{orders.orderDate}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <div class="col-md-12 mb-2">
+                                                <div class="form-group">
+                                                    <label>Billing Name</label>
+                                                    <div >
+                                                        {{!-- <input type="text" class="form-control date-picker"> --}}
+                                                        {{orders.address.[0].firstname}}  {{orders.address.[0].lastname}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 grid-margin">
+                            <div class="card card-white h-100">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Addresses</h4>
+                                </div>
+                                <div class="card-body" style="
+    background-color: #567086;
+    color: white;
+">
+                                    <div class="row">
+                                        <div class="col-lg-auto me-xl-5 pe-xl-5 mb-4 mb-xl-0">
+                                            <h6 class="text-uppercase fw-bold mb-3">billing</h6>
+                                            <ul class="list-unstyled ps-0">
+                                                 <li>{{orders.address.[0].company}}</li>
+                                                <li>{{orders.address.[0].city}}</li>
+                                                {{!-- <li>Detroit</li> --}}
+                                                <li>{{orders.address.[0].state}}</li>
+                                                <li>{{orders.address.[0].zip}}</li>
+                                                <li>{{orders.address.[0].country}}</li>
+                                            </ul>
+                                            <strong class="d-block">Email address:</strong>
+                                            <a href="#">{{orders.address.[0].email}}</a>
+                                            <strong class="d-block mt-3">Phone:</strong>
+                                            <a href="#">{{orders.address.[0].phone}}</a>
+                                        </div>
+                                        <div class="col-lg-auto ps-xl-5">
+                                            <h6 class="fw-bold text-uppercase mb-3">shipping</h6>
+                                            <ul class="list-unstyled ps-0">
+                                                <li>{{orders.address.[0].company}}</li>
+                                                <li>{{orders.address.[0].city}}</li>
+                                                {{!-- <li>Detroit</li> --}}
+                                                <li>{{orders.address.[0].state}}</li>
+                                                <li>{{orders.address.[0].zip}}</li>
+                                                <li>{{orders.address.[0].country}}</li>
+                                            </ul>
+                                            <strong class="d-block">Email address:</strong>
+                                            <a href="#">{{orders.address.[0].email}}</a>
+                                            <strong class="d-block mt-3">Phone:</strong>
+                                            <a href="#5551234">{{orders.address.[0].phone}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                    <!-- row -->
+                    <div class="row g-xl-3">
+                        <div class="col-lg-12 grid-margin">
+                            <div class="card card-white h-100">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Products</h4>
+                                </div>
+                                <div class="card-body" >
+                                    <div class="table-responsive">
+                                        <table class="table mb-0 order-details-table">
+                                            <thead class="bg-light" >
+                                                <tr style="
+    background-color: #50697f;
+">
+                                                    <th class="ps-4 id">ID</th>
+                                                    <th class="text-end image">Image</th>
+                                                    <th class="name">Name</th>
+                                                    <th class="text-end cost">Cost</th>
+                                                    <th class="text-end qty">Qty</th>
+                                                    <th class="text-end total">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{#each allProducts}}
+                                                <tr>
+                                                    <td class="ps-4"><a href="#"><strong>{{this.product._id}}</strong></a></td>
+                                                    <td class="text-end"><img src="/images/uploads/{{this.product.image.[0]}}" alt="image " width="90px"
+                                                height="90px" style="border-radius:10px"></td>
+                                                    <td><a href="#">{{this.product.name}}</a></td>
+                                                    <td class="text-end">₹{{this.product.price}}</td>
+                                                    <td class="text-end">{{this.quantity}}</td>
+                                                    <td class="text-end">₹{{this.total}}</td>
+                                                </tr>
+                                                {{!-- <tr>
+                                                    <td class="ps-4"><a href="#"><strong>290398</strong></a></td>
+                                                    <td><a href="#">Sun Protection Cap</a></td>
+                                                    <td class="text-end">$10.20</td>
+                                                    <td class="text-end">1</td>
+                                                    <td class="text-end">$10.20</td>
+                                                </tr> --}}
+                                                {{!-- <tr>
+                                                    <td class="ps-4"><a href="#"><strong>290399</strong></a></td>
+                                                    <td><a href="#">Heel Character Shoes</a></td>
+                                                    <td class="text-end">$19.50</td>
+                                                    <td class="text-end">1</td>
+                                                    <td class="text-end">$19.50</td>
+                                                </tr> --}}
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row justify-content-end flex-column flex-lg-row mt-5" style="
+    background-color: #50697f;
+    color: white;
+">
+                                        <div class="col-auto me-5">
+                                            <h6 class="fw-bold mb-2">Items Subtotal</h6>
+                                            <span class="d-flex align-items-center">
+                                                {{numberOfProducts}} Items
+                                                <i class="fas fa-chevron-right f-s-11 text-primary px-3"></i>
+                                                <b>₹{{orders.subTotal}}</b>
+                                            </span>
+                                        </div>
+                                        <div class="col-auto me-5">
+                                            <h6 class="fw-bold mb-2">Shipping</h6>
+                                            <span class="d-flex align-items-center">
+                                                {{orders.shipping}}
+                                                <i class="fas fa-chevron-right f-s-11 text-primary px-3"></i>
+                                                <b>₹0.00</b>
+                                            </span>
+                                        </div>
+                                         <div class="col-auto">
+                                            <h6 class="fw-bold mb-2">Discount</h6>
+                                            <span class="d-flex align-items-center justify-content-lg-end">
+                                                <strong>₹{{orders.discount}}</strong>
+                                                <br>
+                                                
+                                            </span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <h6 class="fw-bold mb-2">Order Total</h6>
+                                            <span class="d-flex align-items-center justify-content-lg-end">
+                                                <strong>₹{{orders.total}}</strong>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                    <!-- row -->
+                    <div class="row g-xl-3">
+                        <div class="col-xl-4 grid-margin">
+                            <div class="card card-white h-100">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Shipping Information</h4>
+                                </div>
+                                <div class="card-body" style="
+    background-color: #567086;
+    color: white;
+">
+                                    <table class="table table-borderless mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <th colspan="2">
+                                                    <p class="m-0">{{orders.address.[0].firstname}} {{orders.address.[0].lastname}}</p>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Address:</th>
+                                                <td>{{orders.address.[0].company}} {{orders.address.[0].city}} {{orders.address.[0].state}}  {{orders.address.[0].zip}}  {{orders.address.[0].country}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Phone :</th>
+                                                <td>{{orders.address.[0].phone}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Mobile :</th>
+                                                <td>{{orders.address.[0].phone}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-xl-4 grid-margin">
+                            <div class="card card-white h-100">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Billing Information</h4>
+                                </div>
+                                <div class="card-body" style="
+    background-color: #567086;
+    color: white;
+">
+                                    <table class="table table-borderless table-sm mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Payment Type:</th>
+                                                <td>Credit Card</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Provider :</th>
+                                                <td>Visa ending in 2851</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Valid Date :</th>
+                                                <td>02/2021</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">CVV :</th>
+                                                <td>xxx</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-xl-4 grid-margin">
+                            <div class="card card-white h-100">
+                                <div class="card-heading clearfix">
+                                    <h4 class="card-title">Delivery Info</h4>
+                                </div>
+                                <div class="card-body" style="
+    background-color: #567086;
+    color: white;
+">
+                                    <div class="text-center">
+                                        <div class="my-2">
+                                            <i class="fa fa-truck"></i>
+                                        </div>
+                                        <h5><b>{{orders.shipping}}</b></h5>
+                                        <div class="mt-2 pt-1">
+                                            <p class="mb-1"><span>Order ID :</span> {{orders.orderId}}</p>
+                                            <p class="mb-0"><span>Payment Mode :</span> {{orders.payment}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                </div>
+                </div>
+    
+    
+
+            <footer class="tm-footer row tm-mt-small">
+                <div class="col-12 font-weight-light">
+                    <p class="text-center text-white mb-0 px-4 small">
+                        Copyright &copy; <b>2018</b> All rights reserved.
+
+                        Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template
+                            Mo</a>
+                    </p>
+                </div>
+            </footer>
+        </div>
+
+        <script src="/admin/js/jquery-3.3.1.min.js"></script>
+        <!-- https://jquery.com/download/ -->
+        <script src="/admin/js/moment.min.js"></script>
+        <!-- https://momentjs.com/ -->
+        <script src="/admin/js/Chart.min.js"></script>
+        <!-- http://www.chartjs.org/docs/latest/ -->
+        <script src="/admin/js/bootstrap.min.js"></script>
+        <!-- https://getbootstrap.com/ -->
+        <script src="/admin/js/tooplate-scripts.js"></script>
+        <script>
+            Chart.defaults.global.defaultFontColor = 'white';
+            let ctxLine,
+                ctxBar,
+                ctxPie,
+                optionsLine,
+                optionsBar,
+                optionsPie,
+                configLine,
+                configBar,
+                configPie,
+                lineChart;
+            barChart, pieChart;
+            // DOM is ready
+            $(function () {
+                drawLineChart(); // Line Chart
+                drawBarChart(); // Bar Chart
+                drawPieChart(); // Pie Chart
+
+                $(window).resize(function () {
+                    updateLineChart();
+                    updateBarChart();
+                });
+            })
+        </script>
+</body>
+
+</html>
