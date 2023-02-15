@@ -20,12 +20,17 @@ const moment = require("moment");
 const Coupon = require('../model/coupon')
 const order = require('../model/order')
 const { PhoneNumberInstance } = require('twilio/lib/rest/lookups/v2/phoneNumber')
+const  { ObjectId } = require('mongodb')
 
 
 //user home
 
 const userhome = async (req, res) => {
     try {
+        a="63bf48297289a661b982166c"
+       console.log( typeof(a))
+        a=ObjectId(a)
+       console.log( typeof(a))
         const banner = await banners.find({}).sort({ Date: -1 })
         const product = await products.find({}).sort({ Date: -1 }).limit(8)
         const { login, userId } = req.session
