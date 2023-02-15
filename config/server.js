@@ -5,7 +5,7 @@ var mongoose=require('mongoose')
 
 // const url = "mongodb://127.0.0.1:27017/BESTSHOPPY";
  const url = process.env.url;
-
+console.log(url,1212121);
 
 mongoose.set("strictQuery", false);
 mongoose
