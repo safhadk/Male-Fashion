@@ -4,7 +4,7 @@
 var mongoose=require('mongoose')
 
 // const url = "mongodb://127.0.0.1:27017/BESTSHOPPY";
- const url = "mongodb+srv://safad:skktkl4455%40atlas@cluster0.dy5gyxe.mongodb.net/BESTSHOPPY";
+ const url = process.env.url;
 
 
 mongoose.set("strictQuery", false);
