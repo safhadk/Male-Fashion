@@ -49,10 +49,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', adminRouter);
 app.use(userRouter);
 
-
 userRouter.use((req, res, next) => {
   const hasTrailingSlash = req.originalUrl.slice(-1) === '/';
   const isRootRoute = req.originalUrl === '/';
+
   if (hasTrailingSlash && !isRootRoute) {
     const newUrl = req.originalUrl.slice(0, -1);
     return res.redirect(301, newUrl);
