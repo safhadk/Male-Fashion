@@ -1,7 +1,7 @@
 //connecting mongoose to mongodb database
 
-require('dotenv').config()
 var mongoose=require('mongoose')
+require ("dotenv").config()
 
 // const url = "mongodb://127.0.0.1:27017/BESTSHOPPY";
  const url = process.env.url;
