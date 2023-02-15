@@ -129,11 +129,12 @@ return result;
 
       const orders = await getOrders();
       const sales = await getsales();
-      console.log(orders[0].count+" agdgafdgdag")
-      console.log(sales[1].totalSales+" 85222")
-      let monthOrder = { jan: orders[0].count, feb: orders[1].count };
-      let monthSales = {jan:sales[0].totalSales,feb:sales[1].totalSales}
-      console.log("month order is" + monthOrder)
+      let monthOrder;
+      let monthSales;
+      if(orders&&sales){
+      monthOrder = { jan: orders[0].count, feb: orders[1].count };
+      monthSales = {jan:sales[0].totalSales,feb:sales[1].totalSales}
+      }
       const delivered = await order.find({ status: "Delivered" }).count()
       const cancelled = await order.find({ status: "Cancelled" }).count()
       const returned = await order.find({ status: "Returned" }).count()
