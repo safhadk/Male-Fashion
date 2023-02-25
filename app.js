@@ -17,10 +17,7 @@ const db = require("./config/server");
 const adminRouter = require('./routes/admin_router');
 const userRouter = require('./routes/user_router');
 
-
 const app = express();
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,14 +41,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 app.use('/admin', adminRouter);
 app.use('/', userRouter);
-
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -70,8 +61,9 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(process.env.portNumber, () => {
-  console.log('Server is running on port 3000');
+  console.log('Server is running on port 8000');
 });
+
 
 
 

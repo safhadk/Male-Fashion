@@ -396,7 +396,7 @@
 
                                     <ul class="product__hover">
                                         <li onclick="addToWishlist('{{this._id}}')"><img src="/img/icon/heart.png"
-                                                alt="heart"></li>
+                                                alt="heart" style="display:block" id="heart{{this._id}}"></li>
                                         {{!-- <li><a href="#"><img src="img/icon/compare.png" alt="">
                                                 <span>Compare</span></a>
                                         </li>
@@ -950,6 +950,13 @@
 
     <script>
         function addToWishlist(productId) {
+            const heartElement = document.getElementById(`heart${productId}`);
+if (heartElement) {
+    console.log("disabled success")
+  heartElement.style.display = "none";
+} else {
+  console.error(`Element with ID 'heart${productId}' not found.`);
+}
             axios.post('/wishlist', { productId: productId })
                 .then(response => {
                     if (response.data) {
@@ -964,6 +971,8 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
+                        
+                         heartElement.style.display = "block"; 
                         }
                     } else {
 

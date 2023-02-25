@@ -20,17 +20,17 @@ const moment = require("moment");
 const Coupon = require('../model/coupon')
 const order = require('../model/order')
 const { PhoneNumberInstance } = require('twilio/lib/rest/lookups/v2/phoneNumber')
-const  { ObjectId } = require('mongodb')
+const { ObjectId } = require('mongodb')
 
 
 //user home
 
 const userhome = async (req, res) => {
     try {
-        a="63bf48297289a661b982166c"
-       console.log( typeof(a))
-        a=ObjectId(a)
-       console.log( typeof(a))
+        a = "63bf48297289a661b982166c"
+        console.log(typeof (a))
+        a = ObjectId(a)
+        console.log(typeof (a))
         const banner = await banners.find({}).sort({ Date: -1 })
         const product = await products.find({}).sort({ Date: -1 }).limit(8)
         const { login, userId } = req.session
@@ -99,30 +99,46 @@ const postsignup = async (req, res) => {
             req.session.userexist = true
             res.redirect('/signup')
         } else {
-            const generateOTP = () => {
-                let randomotp = '';
-                for (let i = 0; i < 6; i++) {
-                    randomotp += Math.floor(Math.random() * 10);
-                }
-                return randomotp;
-            };
-            const randomotp = generateOTP()
-            req.session.otp = randomotp;
-            client.messages.create({
-                body: `Hi ${name} YOUR OTP IS ${randomotp}`,
-                to: `+91 ${phoneNumber}`,
-                from: process.env.TWILIO_PHONE_NUMBER
-            }).then(message => {
-                req.session.password = password
-                req.session.password2 = password2
-                req.session.email = email
-                req.session.name = name
-                req.session.phoneNumber = phoneNumber
-                res.render('user/verifyotp', { phoneNumber: phoneNumber });
-            }).catch(error => {
-                console.error(error)
-                res.redirect('/signup')
-            })
+            // const generateOTP = () => {
+            //     let randomotp = '';
+            //     for (let i = 0; i < 6; i++) {
+            //         randomotp += Math.floor(Math.random() * 10);
+            //     }
+            //     return randomotp;
+            // };
+            // const randomotp = generateOTP()
+            // req.session.otp = randomotp;
+            // client.messages.create({
+            //     body: `Hi ${name} YOUR OTP IS ${randomotp}`,
+            //     to: `+91 ${phoneNumber}`,
+            //     from: process.env.TWILIO_PHONE_NUMBER
+            // }).then(message => {
+            //     req.session.password = password
+            //     req.session.password2 = password2
+            //     req.session.email = email
+            //     req.session.name = name
+            //     req.session.phoneNumber = phoneNumber
+            //     res.render('user/verifyotp', { phoneNumber: phoneNumber });
+            // }).catch(error => {
+            //     console.error(error)
+            //     res.redirect('/signup')
+            // })
+            client.verify.v2.services('VA31d3b9a2dea46eadd0aa4eb0fe70eb7a')
+                .verifications
+                .create({ to: `+91${phoneNumber}`, channel: 'sms' })
+                .then(verification => {
+                    req.session.password = password
+                    req.session.password2 = password2
+                    req.session.email = email
+                    req.session.name = name
+                    req.session.phoneNumber = phoneNumber
+                    res.render('user/verifyotp', { phoneNumber: phoneNumber });
+                })
+                .catch(error => {
+                    console.error(error)
+                    req.session.checkInternet = true
+                    res.redirect('/signup')
+                })
         }
     } catch (error) {
         console.log(`Error in postsignup: ${error.message}`)
@@ -134,31 +150,56 @@ const postsignup = async (req, res) => {
 
 const verifyotp = async (req, res) => {
     try {
-        const storedOtp = req.session.otp;
+        // const storedOtp = req.session.otp;
+        // const { name, email, password, password2, phoneNumber } = req.session
+        // const { otp } = req.body
+        // if (otp == storedOtp) {
+        //     if (password && password2) {
+        //         const hashedpassword = await bcrypt.hash(password, 10)
+        //         const hashedconfirmpassword = await bcrypt.hash(password2, 10)
+        //         await user.create({
+        //             name: name,
+        //             email: email,
+        //             password: hashedpassword,
+        //             password2: hashedconfirmpassword,
+        //             phoneNumber: phoneNumber
+        //         })
+        //         req.session.otpverified = true
+        //         res.redirect('/login')
+        //     } else {
+        //         console.error(`Error in Password: ${password} ${password2}`)
+        //     }
+        // } else if (req.body.otp !== storedOtp) {
+        //     req.session.invalidotp = true
+        //     res.redirect('/verifyotp')
+        // } else {
+        //     res.redirect('/signup')
+        // }
         const { name, email, password, password2, phoneNumber } = req.session
         const { otp } = req.body
-        if (otp == storedOtp) {
-            if (password && password2) {
-                const hashedpassword = await bcrypt.hash(password, 10)
-                const hashedconfirmpassword = await bcrypt.hash(password2, 10)
-                await user.create({
-                    name: name,
-                    email: email,
-                    password: hashedpassword,
-                    password2: hashedconfirmpassword,
-                    phoneNumber: phoneNumber
-                })
-                req.session.otpverified = true
-                res.redirect('/login')
-            } else {
-                console.error(`Error in Password: ${password} ${password2}`)
-            }
-        } else if (req.body.otp !== storedOtp) {
-            req.session.invalidotp = true
-            res.redirect('/verifyotp')
-        } else {
-            res.redirect('/signup')
-        }
+        client.verify.v2.services('VA31d3b9a2dea46eadd0aa4eb0fe70eb7a')
+            .verificationChecks
+            .create({ to: `+91${phoneNumber}`, code: otp })
+            .then (async verification_check  => {
+                if (verification_check.status == "approved") {
+                    const hashedpassword = await bcrypt.hash(password, 10)
+                    const hashedconfirmpassword = await bcrypt.hash(password2, 10)
+                    await user.create({
+                        name: name,
+                        email: email,
+                        password: hashedpassword,
+                        password2: hashedconfirmpassword,
+                        phoneNumber: phoneNumber
+                    })
+                    req.session.otpverified = true
+                    res.redirect('/login')
+                } else if (verification_check.status == "pending") {
+                    req.session.resetinvalidotp = true
+                    res.redirect('/verifyotp')
+                } else {
+                    res.redirect('/signup')
+                }
+            })
     } catch (error) {
         console.error(`Error in verifyotp: ${error.message}`)
         res.render('user/something-wrong')
@@ -267,7 +308,7 @@ const productdetailpage = async (req, res) => {
         productdetails = await products.findOne({ _id: (id) })
         let category;
         if (productdetails) {
-            category=productdetails.category
+            category = productdetails.category
             req.session.temp = productdetails._id;
         } else {
             const { temp } = req.session
@@ -280,10 +321,10 @@ const productdetailpage = async (req, res) => {
             cartQuantity = userCart.cartquantity
             grandTotal = userCart.grandTotal
         }
-        const relatedProduct = await products.find({ category: category }).sort({Date:-1}).limit(4)
+        const relatedProduct = await products.find({ category: category }).sort({ Date: -1 }).limit(4)
         console.log("related product")
         console.log(relatedProduct)
-        res.render('user/product_detailpage', { productdetails, login: login, addedtocart: addedtocart, cartQuantity, grandTotal,relatedProduct })
+        res.render('user/product_detailpage', { productdetails, login: login, addedtocart: addedtocart, cartQuantity, grandTotal, relatedProduct })
         req.session.addedtocart = false
 
     } catch (error) {
@@ -406,16 +447,16 @@ const getcart = async (req, res) => {
     try {
         const { loginuser } = req.session
         userpersonalid = req.session.profileId
-        req.session.appliedCode=false;
-        console.log(req.session.appliedCode+" 8967656")
+        req.session.appliedCode = false;
+        console.log(req.session.appliedCode + " 8967656")
         const usercart = await cart.findOne({ user: userpersonalid }).populate("items.product", "image price name");
         let cartdetails;
         let emptyCart;
-        if ((!usercart)||(usercart.quantity==0)){
-        req.session.emptyCart=true
-    }else{
-        req.session.emptyCart=false
-    }
+        if ((!usercart) || (usercart.quantity == 0)) {
+            req.session.emptyCart = true
+        } else {
+            req.session.emptyCart = false
+        }
         if (usercart) {
             console.log("cart finded")
             cartdetails = usercart.items
@@ -453,13 +494,13 @@ const checkout = async (req, res) => {
                 }
             })
             console.log(req.session.emptyCart)
-            if (req.session.emptyCart){
+            if (req.session.emptyCart) {
                 res.redirect('/cart')
-            }else{
-            res.render('user/checkout', { savedAddress, checkout, finalTotal: req.session.finalTotal, couponApplied, login, cartQuantity, popular })
+            } else {
+                res.render('user/checkout', { savedAddress, checkout, finalTotal: req.session.finalTotal, couponApplied, login, cartQuantity, popular })
             }
         }
-        
+
     } catch (error) {
         console.log(error.message + " error in  checkout ")
         res.render('user/something-wrong')
@@ -540,47 +581,47 @@ const applyCoupon = async (req, res) => {
     try {
         const userpersonalid = req.session.profileId;
         const appliedCode = req.body.appliedCode;
-        req.session.appliedCode=appliedCode
+        req.session.appliedCode = appliedCode
         const userOrder = await order.findOne({ user: userpersonalid });
-        req.session.userused=userOrder && userOrder.couponCode == appliedCode
+        req.session.userused = userOrder && userOrder.couponCode == appliedCode
         const userCart = await cart.findOne({ user: userpersonalid });
-        
+
         let grandTotal
-        if (userCart){
-            grandTotal=userCart.grandTotal
-            
+        if (userCart) {
+            grandTotal = userCart.grandTotal
+
         }
-        if (grandTotal == 0||!userCart) {
-            res.send({ message: 'Your Cart Is Empty',grandTotal:grandTotal });
-            await cart.updateOne({ user: userpersonalid }, {$set: { discount: 0,finalTotal: 0}});
+        if (grandTotal == 0 || !userCart) {
+            res.send({ message: 'Your Cart Is Empty', grandTotal: grandTotal });
+            await cart.updateOne({ user: userpersonalid }, { $set: { discount: 0, finalTotal: 0 } });
         }
         else if (appliedCode) {
             console.log("entered to applied code");
             const findCoupon = await coupon.findOne({ code: appliedCode });
             if (findCoupon && userCart) {
-                req.session.minspend=userCart.grandTotal < findCoupon.minSpend
+                req.session.minspend = userCart.grandTotal < findCoupon.minSpend
                 const appliedDate = Date.now();
                 const formatAppliedDate = moment(appliedDate).format("DD MMM YYYY");
                 const expireDate = findCoupon.endDate;
                 const formatExpireDate = moment(expireDate).format("DD MMM YYYY");
                 if (appliedDate > expireDate) {
                     console.log("coupon expired");
-                    
-                    await cart.updateOne({ user: userpersonalid }, {$set: { discount: 0,finalTotal: 0}});
-                    res.send({ message: 'Coupon Expired',finalTotal:userCart.finalTotal});
+
+                    await cart.updateOne({ user: userpersonalid }, { $set: { discount: 0, finalTotal: 0 } });
+                    res.send({ message: 'Coupon Expired', finalTotal: userCart.finalTotal });
                 }
 
                 else if (userOrder && userOrder.couponCode == appliedCode) {
                     console.log("coupon already used ");
-                    res.send({ message: 'Coupon Already Used'});
-                    await cart.updateOne({ user: userpersonalid }, {$set: { discount: 0,finalTotal: 0}});
+                    res.send({ message: 'Coupon Already Used' });
+                    await cart.updateOne({ user: userpersonalid }, { $set: { discount: 0, finalTotal: 0 } });
                 }
 
                 else if (userCart.grandTotal < findCoupon.minSpend) {
                     console.log("spend minimum amount")
-                    
-                    await cart.updateOne({ user: userpersonalid }, {$set: { discount: 0,finalTotal: 0}});
-                    res.send({ message: 'Spend Minimum of ₹' + findCoupon.minSpend + " Rupees",grandTotal:grandTotal,finalTotal:grandTotal,minSpend:true });
+
+                    await cart.updateOne({ user: userpersonalid }, { $set: { discount: 0, finalTotal: 0 } });
+                    res.send({ message: 'Spend Minimum of ₹' + findCoupon.minSpend + " Rupees", grandTotal: grandTotal, finalTotal: grandTotal, minSpend: true });
                 }
                 else {
                     console.log("coupon code success");
@@ -613,15 +654,15 @@ const applyCoupon = async (req, res) => {
                 }
             } else {
                 console.log("coupon invalid");
-                res.send({ message: 'Invalid coupon code',grandTotal:grandTotal });
-                await cart.updateOne({ user: userpersonalid }, {$set: { discount: 0,finalTotal: 0}});
-                res.send({ message: 'Invalid coupon code',grandTotal:grandTotal,});
+                res.send({ message: 'Invalid coupon code', grandTotal: grandTotal });
+                await cart.updateOne({ user: userpersonalid }, { $set: { discount: 0, finalTotal: 0 } });
+                res.send({ message: 'Invalid coupon code', grandTotal: grandTotal, });
             }
 
         } else {
             console.log("enter code");
-            res.send({ message: 'Please Enter a coupon code',grandTotal:grandTotal  });
-            await cart.updateOne({ user: userpersonalid }, {$set: { discount: 0,finalTotal: 0}});
+            res.send({ message: 'Please Enter a coupon code', grandTotal: grandTotal });
+            await cart.updateOne({ user: userpersonalid }, { $set: { discount: 0, finalTotal: 0 } });
         }
     } catch (error) {
         console.log(error.message + " error in  applyCoupon ")
@@ -849,26 +890,26 @@ const cartIncrement = async (req, res) => {
     try {
         const { itemId } = req.body;
         const userpersonalid = req.session.profileId;
-        const {appliedCode}=req.session
+        const { appliedCode } = req.session
         const product = await products.findOne({ _id: itemId });
-        const carts = await cart.findOne({user:userpersonalid})
-        const coupons=await coupon.findOne({code:appliedCode})
-         if (product) {
+        const carts = await cart.findOne({ user: userpersonalid })
+        const coupons = await coupon.findOne({ code: appliedCode })
+        if (product) {
             const price = product.price;
             const findCoupon = await coupon.findOne({ code: appliedCode });
             let discount;
-            if (findCoupon){
-               const percentage=findCoupon.percentage
-                 discount=(price*percentage)/100
-                 if ((carts.discount+discount>=500)){
-                    discount=500-carts.discount
-                 }
-            }else{
-                discount=0
+            if (findCoupon) {
+                const percentage = findCoupon.percentage
+                discount = (price * percentage) / 100
+                if ((carts.discount + discount >= 500)) {
+                    discount = 500 - carts.discount
+                }
+            } else {
+                discount = 0
             }
             const userCart = await cart.updateOne(
                 { user: userpersonalid, "items.product": itemId },
-                { $inc: { "items.$.quantity": 1, "items.$.total": price, grandTotal: price, cartquantity: 1, finalTotal: price,discount:discount} }
+                { $inc: { "items.$.quantity": 1, "items.$.total": price, grandTotal: price, cartquantity: 1, finalTotal: price, discount: discount } }
             );
         }
         const cartdetails = await cart.findOne({ user: userpersonalid, "items.product": itemId });
@@ -878,7 +919,7 @@ const cartIncrement = async (req, res) => {
                 const total = usercart.items[0].total;
                 console.log(total + "product cart details 4455");
                 console.log(usercart + "product cart details 1234");
-                res.send({ grandTotal: cartdetails.grandTotal, finalTotal: cartdetails.finalTotal, productTotal: total, cartquantity: cartdetails.cartquantity,discount:cartdetails.discount });
+                res.send({ grandTotal: cartdetails.grandTotal, finalTotal: cartdetails.finalTotal, productTotal: total, cartquantity: cartdetails.cartquantity, discount: cartdetails.discount });
                 console.log("sended");
             }
         } else {
@@ -1164,8 +1205,8 @@ const categoryFilter = async (req, res) => {
 
 const forgotPassword = (req, res) => {
     try {
-        const { checkInternet,userNotFound } = req.session
-        res.render('user/forgot-password', { checkInternet: checkInternet, userNotFound:userNotFound})
+        const { checkInternet, userNotFound } = req.session
+        res.render('user/forgot-password', { checkInternet: checkInternet, userNotFound: userNotFound })
         req.session.checkInternet = false;
         req.session.userNotFound = false;
     } catch (error) {
@@ -1222,22 +1263,23 @@ const resetotp = (req, res) => {
 
 const resetverifyotp = async (req, res) => {
     try {
-    const {phoneNumber}=req.session
-    const {otp}=req.body
-    client.verify.v2.services('VA31d3b9a2dea46eadd0aa4eb0fe70eb7a')
-    .verificationChecks
-    .create({to: `+91${phoneNumber}`,code:otp})
-    .then(verification_check => {if(verification_check.status=="approved"){
-    req.session.otpcorrect = true
-    req.session.resetotpverified = true
-    res.redirect('/newPassword')
-}else if(verification_check.status=="pending"){
-    req.session.resetinvalidotp = true
-    res.redirect('/resetotp')
-}else{
-    res.redirect('/forgotPassword')  
-}
-})
+        const { phoneNumber } = req.session
+        const { otp } = req.body
+        client.verify.v2.services('VA31d3b9a2dea46eadd0aa4eb0fe70eb7a')
+            .verificationChecks
+            .create({ to: `+91${phoneNumber}`, code: otp })
+            .then(verification_check => {
+                if (verification_check.status == "approved") {
+                    req.session.otpcorrect = true
+                    req.session.resetotpverified = true
+                    res.redirect('/newPassword')
+                } else if (verification_check.status == "pending") {
+                    req.session.resetinvalidotp = true
+                    res.redirect('/resetotp')
+                } else {
+                    res.redirect('/forgotPassword')
+                }
+            })
     } catch (error) {
         console.error(`Error in resetverifyotp : ${error.message}`)
         res.render('user/something-wrong')
@@ -1248,7 +1290,7 @@ const resetverifyotp = async (req, res) => {
 
 const newPassword = (req, res) => {
     try {
-        res.render('user/new-password',{verified:req.session.otpcorrect})
+        res.render('user/new-password', { verified: req.session.otpcorrect })
         req.session.otpcorrect = false
     } catch (error) {
         console.error(`Error in newPassword : ${error.message}`)
@@ -1446,11 +1488,11 @@ const payment = (req, res) => {
 }
 
 
-const priceFilter=async(req,res)=>{
-console.log("price filtering")
-const value =req.body.value
+const priceFilter = async (req, res) => {
+    console.log("price filtering")
+    const value = req.body.value
 
-res.send({message:a})
+    res.send({ message: a })
 }
 
 
