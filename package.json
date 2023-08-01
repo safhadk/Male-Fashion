@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ap.js",
+    "start": "node app.js",
     "dev": "supervisor app.js"
   },
   "dependencies": {

@@ -76,3 +76,4 @@ router.get('/monthlyReport',session,monthlyReport)
 router.get('/yearlyReport',session,yearlyReport)
 
 module.exports = router;
+

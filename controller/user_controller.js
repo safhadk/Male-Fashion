@@ -150,31 +150,6 @@ const postsignup = async (req, res) => {
 
 const verifyotp = async (req, res) => {
     try {
-        // const storedOtp = req.session.otp;
-        // const { name, email, password, password2, phoneNumber } = req.session
-        // const { otp } = req.body
-        // if (otp == storedOtp) {
-        //     if (password && password2) {
-        //         const hashedpassword = await bcrypt.hash(password, 10)
-        //         const hashedconfirmpassword = await bcrypt.hash(password2, 10)
-        //         await user.create({
-        //             name: name,
-        //             email: email,
-        //             password: hashedpassword,
-        //             password2: hashedconfirmpassword,
-        //             phoneNumber: phoneNumber
-        //         })
-        //         req.session.otpverified = true
-        //         res.redirect('/login')
-        //     } else {
-        //         console.error(`Error in Password: ${password} ${password2}`)
-        //     }
-        // } else if (req.body.otp !== storedOtp) {
-        //     req.session.invalidotp = true
-        //     res.redirect('/verifyotp')
-        // } else {
-        //     res.redirect('/signup')
-        // }
         const { name, email, password, password2, phoneNumber } = req.session
         const { otp } = req.body
         client.verify.v2.services('VA31d3b9a2dea46eadd0aa4eb0fe70eb7a')
@@ -494,11 +469,13 @@ const checkout = async (req, res) => {
                 }
             })
             console.log(req.session.emptyCart)
-            if (req.session.emptyCart) {
+            if (checkout){
+            if (req.session.emptyCart||checkout.items.length==0) {
                 res.redirect('/cart')
             } else {
                 res.render('user/checkout', { savedAddress, checkout, finalTotal: req.session.finalTotal, couponApplied, login, cartQuantity, popular })
             }
+        }
         }
 
     } catch (error) {

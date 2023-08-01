@@ -391,7 +391,7 @@
                                 <div class="product__item__pic set-bg">
                                     <div style="object-fit: cover;"><a href="/productdetail/{{this._id}}"><img
                                                 src="/images/uploads/{{this.image.[0]}}"
-                                                style="background-position:top; height: 330px;width:270px; object-fit: cover;border-radius:10px"></a>
+                                                style="background-position:top; height: 330px;width:270px; object-fit: cover;border-radius:10px;"></a>
                                     </div>
 
                                     <ul class="product__hover">
@@ -401,10 +401,12 @@
                                                 <span>Compare</span></a>
                                         </li>
                                         <li><a href="#"><img src="img/icon/search.png" alt=""></a></li> --}}
+                                    
                                     </ul>
                                 </div>
                                 <div class="product__item__text mt-5">
                                     <h6>{{this.name}}</h6>
+                                     
                                     <a href="/productdetail/{{this._id}}" class="add-cart" style="color: green;"> View Product</a>
 
 
@@ -414,9 +416,11 @@
                                         <i class="fa fa-star" style="color: orange;"></i>
                                         <i class="fa fa-star" style="color: orange;"></i>
                                         <i class="fa fa-star" style="color: orange;"></i>
-                                        <i class="fa fa-star" style="color: orange;"></i>
+                                        <i class="fa fa-star" style="color: orange;"></i><br>
                                     </div>
                                     <h5>₹{{this.price}}</h5>
+                                    <h5 id="stock{{this._id}}" style="display: none;">{{this.stock}}</h5>
+                                    
 
                                     {{!-- <div class="product__color__select">
                                         <label for="pc-4">

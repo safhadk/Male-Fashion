@@ -45,6 +45,14 @@
   }
 }
 </style> --}}
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  /* Hide the arrow controls */
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>
 
 </head>
 
@@ -368,6 +376,7 @@
                                     emptyCart}}₹0{{else}}₹{{usercart.grandTotal}}{{/if}}</span></li>
 
                         </ul>
+                        
                         <a href="/checkout" class="primary-btn" id="checkout" onlick="emptyCart()">Proceed to checkout</a>
                     </div>
                 </div>
@@ -564,32 +573,69 @@
 
 
 
-        function increment(productId) {
+       // Create a variable to keep track of the currently pending requests
+let requests = [];
 
-            console.log("hlo     " + productId)
-            axios.post('/cartIncrement', { itemId: productId })
-                .then(response => {
-                    console.log(response.data + "riyas")
-                    if (response.data) {
-                        document.getElementById("grandTotal").innerHTML = "₹" + response.data.grandTotal
-                        document.getElementById("finaltotal").innerHTML = "₹" + response.data.finalTotal
-                        document.getElementById("discount").innerHTML = "₹" + response.data.discount.toFixed(1)
-                        document.getElementById("productTotal" + productId).innerHTML = "₹" + response.data.productTotal
-                        document.getElementById("top-total").innerHTML = "₹" + response.data.grandTotal
-                        document.getElementById("cartqnty").innerHTML = response.data.cartquantity
+// Add an interceptor to the request to keep track of pending requests
+axios.interceptors.request.use(config => {
+    // Add a unique identifier to the request config
+    config.requestId = Date.now();
 
+    // Add the request to the pending requests array
+    requests.push(config);
 
-                    } else {
-                        console.log("i dont know")
+    return config;
+}, error => {
+    return Promise.reject(error);
+});
 
-                    }
+// Add an interceptor to the response to remove completed requests from the pending requests array
+axios.interceptors.response.use(response => {
+    // Remove the completed request from the pending requests array
+    requests = requests.filter(request => request.requestId !== response.config.requestId);
 
-                })
-                .catch(err => console.error(err));
+    return response;
+}, error => {
+    // Remove the failed request from the pending requests array
+    requests = requests.filter(request => request.requestId !== error.config.requestId);
 
+    return Promise.reject(error);
+});
 
+// Use the requests array to cancel any pending requests before making a new one
+function increment(productId) {
+    // Cancel any pending requests with the same ID as the new request
+    requests.filter(request => request.url === '/cartIncrement' && request.data.itemId === productId)
+        .forEach(request => axios.CancelToken.source(request).cancel());
 
+    console.log("hlo     " + productId)
+    axios.post('/cartIncrement', { itemId: productId }, {
+        cancelToken: new axios.CancelToken(cancel => {
+            // Add a cancel function to the pending request config
+            requests.push({ cancel });
+        })
+    })
+    .then(response => {
+        console.log(response.data + "riyas")
+        if (response.data) {
+            document.getElementById("grandTotal").innerHTML = "₹" + response.data.grandTotal
+            document.getElementById("finaltotal").innerHTML = "₹" + response.data.finalTotal
+            document.getElementById("discount").innerHTML = "₹" + response.data.discount.toFixed(1)
+            document.getElementById("productTotal" + productId).innerHTML = "₹" + response.data.productTotal
+            document.getElementById("top-total").innerHTML = "₹" + response.data.grandTotal
+            document.getElementById("cartqnty").innerHTML = response.data.cartquantity
+        } else {
+            console.log("i dont know")
         }
+    })
+    .catch(err => {
+        if (axios.isCancel(err)) {
+            console.log(`Request canceled: ${err.message}`);
+        } else {
+            console.error(err);
+        }
+    });
+}
     </script>
 
 
@@ -683,7 +729,11 @@
 
         }
     </script>
-
+<script>
+    if({{emptyCart}}){
+        document.getElementById('checkout').style.display="none";
+    }
+</script>
    
 
 
